@@ -2,5 +2,11 @@
 ## [分水岭进行分水分割](https://github.com/DJdongbudong/CPP_Opencv/tree/master/Segment/WaterSeg)
 ### [Opencv_WaterSegment.cpp](https://github.com/DJdongbudong/CPP_Opencv/blob/master/Segment/WaterSeg/Opencv_WaterSegment_onMouse.cpp)
 ![Image](https://github.com/DJdongbudong/CPP_Opencv/blob/master/Segment/WaterSeg/%E5%88%86%E6%B0%B4%E5%B2%AD%E5%88%86%E5%89%B2%E5%9B%BE%E7%89%87.jpg)
+## [匹配_形状](https://github.com/DJdongbudong/CPP_Opencv/tree/master/Matching/Shape)
+```
+可用于形状模板配对，返回匹配值，进行最相似度的筛选。
+```
+## [匹配_灰度梯度](https://github.com/DJdongbudong/CPP_Opencv/tree/master/Matching/Gray%20Gradient)
+
 ## [Feature_Extract]()
 ### 
