@@ -2,7 +2,7 @@
 int main()
 {
 	
-	Mat Mat_Image = imread("./cizhuan/A.bmp");//模板
+	Mat Mat_Image = imread("./resource/A.bmp");//模板
 	Mat Mat_dst, Mat_dst_bw;
 	Segment_WaterSeg demo;
 	demo.Segment_WaterSegment(Mat_Image, Mat_dst, Mat_dst_bw);
