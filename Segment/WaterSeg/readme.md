@@ -7,4 +7,4 @@
 ### 自动分割需求目标ROI
 ### [Opencv_My_Segment_demo.cpp](https://github.com/DJdongbudong/CPP_Opencv/blob/master/Segment/WaterSeg/Opencv_My_Segment_demo.cpp)
 Opencv2.4.13测试成功，结果如下：
-![image]()
+![image](https://github.com/DJdongbudong/CPP_Opencv/blob/master/Segment/WaterSeg/%E5%88%86%E6%B0%B4%E5%B2%AD%E5%BA%94%E7%94%A8%E6%95%88%E6%9E%9C.jpg)
