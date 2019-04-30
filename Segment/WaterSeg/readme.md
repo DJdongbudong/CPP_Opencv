@@ -5,3 +5,6 @@
   该方案使用鼠标进行分割区域定位，确定分割多少个区域。
 ## 实现应用
 ### 自动分割需求目标ROI
+### [Opencv_My_Segment_demo.cpp](https://github.com/DJdongbudong/CPP_Opencv/blob/master/Segment/WaterSeg/Opencv_My_Segment_demo.cpp)
+Opencv2.4.13测试成功，结果如下：
+![image]()
