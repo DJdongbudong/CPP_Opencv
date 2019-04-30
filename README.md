@@ -22,5 +22,11 @@
 ```
 ![image](https://github.com/DJdongbudong/CPP_Opencv/blob/master/Matching/Gray%20Gradient/%E7%81%B0%E5%BA%A6%E6%A2%AF%E5%BA%A6%E5%8C%B9%E9%85%8D%E6%95%88%E6%9E%9C1.jpg)
 
+## [匹配_色彩](https://github.com/DJdongbudong/Cpp_Opencv/blob/master/Matching/Color/Histogram_Matching.cpp)
+```
+输入 彩色图rgb图两张进行计算，返回相似度值。
+```
+![image](https://github.com/DJdongbudong/Cpp_Opencv/blob/master/Matching/Color/%E8%89%B2%E5%BD%A9%E5%8C%B9%E9%85%8D%E6%95%88%E6%9E%9C%E5%9B%BE2.jpg)
+
 ## [Feature_Extract]()
 ### 
