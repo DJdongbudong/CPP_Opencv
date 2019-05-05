@@ -18,7 +18,7 @@ int main(int argc, char* argv)
 	
 	Point2f center = Point(mc_result[0].x, mc_result[0].y);
 	ROI_Segment demo;
-	Mat A = demo.Image_ROI_rotate(Mat_dst, center, angle);
+	Mat A = demo.Image_ROI_rotate(Mat_template, center, angle);
 	Mat B = demo.Image_ROI_rotate(Mat_dst_bw, center, angle);
 	namedWindow("A", 0);
 	imshow("A", A);
@@ -39,6 +39,6 @@ int main(int argc, char* argv)
 	//imwrite("./cizhuanROI/ROI_F.jpg", ROI);
 
 
-	system("pause");
+	//system("pause");
 	return 0;
 }
