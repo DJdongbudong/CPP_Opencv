@@ -1,4 +1,4 @@
-//质心 + NO_ROI两个的坐标进行分水分割
+//质心 + NO_ROI两个的坐标进行分水分割,得到分水分割图及其二值图、重心、角度
 //#include "Segment_WaterSeg.h"
 #include <opencv2\opencv.hpp>
 #include <opencv2\core\core.hpp>
@@ -11,7 +11,7 @@ using namespace std;
 class Segment_WaterSeg
 {
 public:
-	void Segment_WaterSeg::Segment_WaterSegment(Mat Mat_Image, Mat& Mat_dst, Mat& Mat_dst_bw, Point No_ROI = Point(0, 0))
+	void Segment_WaterSeg::Segment_WaterSegment(Mat Mat_Image, Mat& Mat_dst, Mat& Mat_dst_bw, vector<Point2f> &mc_result, double &angle, Point No_ROI = Point(0, 0))
 	{
 		// 目标质心寻找，仅使用二值化 和 非重心寻找 Point
 		Mat grayImage;
@@ -54,7 +54,8 @@ public:
 		imshow("drawContours", drawing);
 		waitKey(0);
 #endif
-
+		
+		/* 【定位到一个ROI的位置】 */
 		// 仅运行轮廓为ROI
 		if (contours_mask.size() != 1)
 		{
@@ -63,16 +64,29 @@ public:
 		}
 
 		cout << contours_mask.size() << "个轮廓" << ";	" << "轮廓定位成功！" << endl;
-		vector<Moments> mu(contours_mask.size());
-		vector<Point2f> mc(contours_mask.size());
-		for (int i = 0; i< contours_mask.size(); i++){
-			mu[i] = moments(contours_mask[i], false);
-		}
-		for (int i = 0; i< contours_mask.size(); i++){
-			mc[i] = Point2d(mu[i].m10 / mu[i].m00, mu[i].m01 / mu[i].m00);
-			cout << mc[i].x << mc[i].y << endl;
-		}
+		vector<Moments> mu(1);
+		vector<Point2f> mc(1);
+		mu[0] = moments(contours_mask[0], false);
+		mc[0] = Point2d(mu[0].m10 / mu[0].m00, mu[0].m01 / mu[0].m00);
+		//cout << mc[0].x <<","<< mc[0].y << endl;
+		
+		// 返回 ROI 中心点
+		//vector<Point2f> mc_result(1);
+		mc_result[0].x = mc[0].x;
+		mc_result[0].y = mc[0].y;
 
+		// 返回 ROI 旋转角度
+		RotatedRect box = minAreaRect(Mat(contours_mask[0]));		
+		//double angle;
+		//利用仿射变换进行旋转        另一种方法，透视变换
+		if (0 < abs(box.angle) && abs(box.angle) <= 45)
+			angle = box.angle;//负数，顺时针旋转
+		else if (45 < abs(box.angle) && abs(box.angle) < 90)
+			angle = 90 - abs(box.angle);//正数，逆时针旋转
+		//cout << angle  << endl;
+
+
+		/* 【分水分割】 */
 		/*ROI + NO_ROI*/
 		Mat Mask_ROI_Image = Mat(Mat_Image.size(), CV_8UC1);
 		// No_ROI点 
@@ -124,11 +138,8 @@ public:
 				}
 			}
 		}
-		//Mat_dst = Mat(MaskWaterShed.size(), CV_8UC3);  // 声明一个最后要显示的图像
-		//Mat_dst_bw = Mat(MaskWaterShed.size(), CV_8UC1);  // 声明一个最后要显示的图像
 		Mat_dst = resImage.clone();
 		Mat_dst_bw = bw_resImage.clone();
-
 	};
 };
 
@@ -139,8 +150,12 @@ int main()
 
 	Mat Mat_Image = imread("./cizhuan/A.bmp");//模板
 	Mat Mat_dst, Mat_dst_bw;
+	vector<Point2f> mc_result(1);
+	double angle;
 	Segment_WaterSeg demo;
-	demo.Segment_WaterSegment(Mat_Image, Mat_dst, Mat_dst_bw);
+	demo.Segment_WaterSegment(Mat_Image, Mat_dst, Mat_dst_bw, mc_result, angle);
+	cout << "[x" << "," << "y" << "," << "angle]" << endl;
+	cout << mc_result[0].x << "," << mc_result[0].y << "," << angle << endl;
 	namedWindow("着色结果", 0);
 	imshow("着色结果", Mat_dst);
 	namedWindow("二值结果", 0);
